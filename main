@@ -1,0 +1,153 @@
+<?include_once $_SERVER['DOCUMENT_ROOT']."/include_header.php"?>
+
+    <h1>Домашнее задание</h1>
+    <div class="post_body">
+        
+    <?
+  
+
+    $hero = array(
+        'Megalaniay' => array(
+            'Имя'=> 'Мегалания',
+            'Классификация' => 'ящерица',
+            'Описание' => 'крупнейшая из известных науке наземных ящериц',
+            'Урон' => 120,
+            'Скорость' => 70,
+            'Выносливость' => 400,
+            'Вес' => 600,
+            'Воздух' => 3
+        ),
+        'Manta' => array(
+            'Имя'=> 'манта',
+            'Классификация' => 'водное млекапитающее',
+            'Описание' => 'крупнейшая из известных науке наземных ящериц',
+            'Урон' => 60,
+            'Скорость' => 80,
+            'Выносливость' => 300,
+            'Вес' => 200,
+            'Воздух' => 0
+        ),
+        'Pter' => array(
+            'Имя'=> 'птеродон',
+            'Классификация' => 'летающий динозавр',
+            'Урон' => 90,
+            'Скорость' => 80,
+            'Выносливость' => 500,
+            'Вес' => 350,
+            'Воздух' => 4 
+        )
+        );
+
+        
+
+
+
+
+        function Create_hero($arr, $name_hero) {
+            $arr = $arr[$name_hero];
+            // array_push($arr, $name_hero);
+            // print_r($arr);
+            function Create_data($arr) {
+
+                foreach($arr as $k => $v){
+
+                                
+                                switch($k) {
+                                    case "Имя" : $names = $v; break;
+                                    case "Классификация" : $classic = $v; break;
+                                    case "Описание" : $descr = $v; break;
+                                    case "Урон" : $damage = $v; break;
+                                    case "Скорость" : $speed = $v; break;
+                                    case "Выносливость" : $stamina = $v; break;
+                                    case "Вес" : $weight = $v; break;
+                                    case "Воздух" : $o = $v; break;
+                                };
+                                
+                            };
+
+                             function Sum($speed, $stamina, $weight) {
+                                $sum = (int)($speed + $stamina + $weight);
+                                return $sum;
+                            };
+                    
+                            $sum = Sum($speed, $stamina, $weight);
+                            
+
+                            function Mean($value) {
+                                $mean = $value / 3;
+                                return (int)$mean;
+                            };
+
+                            $mean = Mean($sum);
+
+                            function Interest($val) {
+                                $interest = $val / 300 * 100;
+                                return (int)$interest;
+                            };
+
+                            $interest = Interest($sum);
+
+                            // $td = "<td style='background: $damages'>$damage</td>"
+
+                            function Create_color($val_char) {
+                                if($val_char < 50){return 'red';}
+                                elseif ($val_char >= 50 && $val_char <= 80) {
+                                    return 'yellow';
+                                }
+                                else{ return 'green';}
+                            };
+
+                            $damages = Create_color($damage);
+                            $speeds = Create_color($speed);
+                            $stamins = Create_color($stamina);
+                            
+                            echo"
+                        
+                            <p class = 'title'>Название: <span>$names</span></p>
+                            <p class = 'title'>Классификация: <span>$classic</span></p>
+                            <p class = 'title'>Описание: <span>$descr</span></p>
+                            
+                            <table >
+
+                                <caption>Характеристики : $names</caption>
+
+                                <tr >
+                                    <th style='background: #6f42c1'>Урон</th>
+                                    <th style='background: green'>скорость</th>
+                                    <th style='background: grey'>выносливость</th>
+                                    <th style='background: #1562d6'>вес</th>
+                                    <th style='background: #481361'>Всего</th>
+                                    <th style='background: #135c61'>В среднем</th>
+                                    <th style='background: #bea512'>Процент</th>
+                                </tr>
+
+                                <tr>
+                                    <td style='background: $damages'>$damage</td>
+                                    <td style='background: $speeds'>$speed</td>
+                                    <td style='background: $stamins'>$stamina</td>
+                                    <td>$weight</td>
+                                    <td>$sum</td>
+                                    <td>$mean</td>
+                                    <td>$interest%</td>
+                                </tr>
+
+                            </table>";
+                            
+                            
+            }
+
+                Create_data($arr);
+                $arr = '';
+                print_r($arr);
+
+        };
+
+
+        Create_hero($hero, 'Megalaniay');
+        Create_hero($hero, 'Manta');
+        // Create_hero($hero, 'Pter');
+ 
+    ?>    
+    </div>
+
+<?include_once $_SERVER['DOCUMENT_ROOT']."/footer.php"?>
